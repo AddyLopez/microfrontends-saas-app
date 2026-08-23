@@ -2,6 +2,7 @@ const { merge } = require("webpack-merge"); // Function enables merging of confi
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // Will inject proper script tags to html file
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const commonConfig = require("./webpack.common");
+const packageJson = require("../package.json"); // Used to facilitate updating of shared dependencies. Here, the JSON gets parsed as a regular JS object
 
 // Development-specific Webpack configuration
 const devConfig = {
@@ -19,7 +20,7 @@ const devConfig = {
       exposes: {
         "./MarketingApp": "./src/bootstrap",
       },
-      shared: ["react", "react-dom"],
+      shared: packageJson.dependencies,
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
