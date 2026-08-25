@@ -1,0 +1,31 @@
+name: deploy-container
+
+# Watches for push event in any file in container directory on master branch
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/container/**"
+
+# Sets execution environment to container directory for running commands
+defaults:
+  run:
+    working-directory: packages/container
+
+# Builds then deploys the app. Runs on Linex-based virtual machine.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2 # Takes code from repository and checks it out, i.e. loads it, onto virtual machine
+      - run: npm install # Installs all dependencies into project
+      - run: npm run build # Runs webpack build process and generates dist directory
+
+      - uses: shinyinc/actions-aws-cli@v1.2 # Gives programatic access to AWS CLI in order to deploy built files to Amazon S3
+      - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest # Uses CLI to run this command. Syncs contents of dist directory with S3 bucket (place to store files on AWS)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS.ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAUT_REGION: "" # placeholder string for now
