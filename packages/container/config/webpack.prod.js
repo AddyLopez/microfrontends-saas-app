@@ -1,7 +1,7 @@
 const { merge } = require("webpack-merge"); // Function enables merging of config in common file with config in this production file
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const commonConfig = require("./webpack.common");
-const packageJson = require("../package.json");
+const packageJson = require("../package.json"); // to facilitate sharing of dependencies
 
 const domain = process.env.PRODUCTION_DOMAIN; // production domain value will be defined when CI/CD pipeline is deployed on AWS
 
