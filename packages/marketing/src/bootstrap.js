@@ -8,7 +8,7 @@ const mount = (element, { onNavigate }) => {
   const history = createMemoryHistory(); // Routing for subapps will rely on memory history, while routing for container app will rely on browser history.
 
   // "listen" event listener exists on history object and will call any function provided as argument.
-  // onNavigate is invoked whenever memory history's URL (path) changes.
+  // onNavigate is invoked whenever memory history's URL (path) changes and communicates up to the container app.
   history.listen(onNavigate);
 
   ReactDOM.render(<App history={history} />, element);
