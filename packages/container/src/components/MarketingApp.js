@@ -6,9 +6,13 @@ const MarketingApp = () => {
   const ref = useRef(null); // useRef React hook creates a reference to an HTML element. Starting value of null
 
   // useEffect hook makes sure mount function is run only once when component is first displayed. ref.current is reference to HTML element
-  // future modifications to useEffect expected
+  // pass in onNavigate function to mount function to pass down to Marketing subapp. Eventual purpose is to sync subapp's memory history with container app's browser history
   useEffect(() => {
-    mount(ref.current);
+    mount(ref.current, {
+      onNavigate: () => {
+        console.log("Container noticed navigation change in Marketing subapp.");
+      },
+    });
   });
 
   return <div ref={ref} />; // assign the reference to div. mount function will create instance of MarketingApp and render it into this div
