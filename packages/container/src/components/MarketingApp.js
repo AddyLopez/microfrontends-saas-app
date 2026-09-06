@@ -9,8 +9,8 @@ const MarketingApp = () => {
   // pass in onNavigate function to mount function to pass down to Marketing subapp. Eventual purpose is to sync subapp's memory history with container app's browser history
   useEffect(() => {
     mount(ref.current, {
-      onNavigate: () => {
-        console.log("Container noticed navigation change in Marketing subapp.");
+      onNavigate: (location) => {
+        console.log(location);
       },
     });
   });
