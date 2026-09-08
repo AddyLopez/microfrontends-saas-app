@@ -18,8 +18,8 @@ const mount = (element, { onNavigate }) => {
 
   // mount now returns a function. facilitates container to subapp (child) communication
   return {
-    onParentNavigate() {
-      console.log("Container just navigated.");
+    onParentNavigate(location) {
+      console.log(location); // location object derives from history.listen(onParentNavigate) function in MarketingApp.js
     },
   };
 };
