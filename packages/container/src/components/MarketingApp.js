@@ -10,8 +10,9 @@ const MarketingApp = () => {
   // useEffect hook makes sure mount function is run only once when component is first displayed. ref.current is reference to HTML element
   // pass in onNavigate function to mount function to pass down to Marketing subapp. Eventual purpose is to sync subapp's memory history with container app's browser history
   // pathname gets destructured from location object and renamed to nextPathname
+  // because onParentNavigate function is returned by mount, it is destructured from mount for use
   useEffect(() => {
-    mount(ref.current, {
+    const { onParentNavigate } = mount(ref.current, {
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location; // pathname from current browser history in container
 
@@ -21,7 +22,9 @@ const MarketingApp = () => {
         }
       },
     });
-  });
+
+    history.listen(onParentNavigate); // listens for any change to Browser History and invokes onParentNavigate
+  }, []); // empty dependency array provided so that useEffect runs only once when MarketingApp is first rendered on the screen
 
   return <div ref={ref} />; // assign the reference to div. mount function will create instance of MarketingApp and render it into this div
 };
