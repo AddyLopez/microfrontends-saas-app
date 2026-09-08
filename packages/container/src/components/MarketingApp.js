@@ -16,7 +16,7 @@ const MarketingApp = () => {
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location; // pathname from current browser history in container
 
-        // prevent circular logic between browser history and memory history: if the two paths are not the same, then the navigation paths need to be synced.
+        // prevents circular logic between browser history and memory history: if the two paths are not the same, then the navigation paths need to be synced.
         if (pathname !== nextPathname) {
           history.push(nextPathname); // syncs memory history in subapp with browser history in container
         }
