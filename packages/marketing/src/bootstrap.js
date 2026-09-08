@@ -15,6 +15,13 @@ const mount = (element, { onNavigate }) => {
   }
 
   ReactDOM.render(<App history={history} />, element);
+
+  // mount now returns a function. facilitates container to subapp (child) communication
+  return {
+    onParentNavigate() {
+      console.log("Container just navigated.");
+    },
+  };
 };
 
 // If in development and in isolation, call mount immediately
