@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { createMemoryHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
+import { createMemoryHistory, createBrowserHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
 
 // Mount function to start up the app. Renders JSX in given element.
-const mount = (element, { onNavigate }) => {
-  const history = createMemoryHistory(); // Routing for subapps will rely on memory history, while routing for container app will rely on browser history.
+const mount = (element, { onNavigate, defaultHistory }) => {
+  const history = defaultHistory || createMemoryHistory(); // defaultHistory is used when running Marketing app in isolation in development. Otherwise, routing for subapps will rely on memory history, while routing for container app will rely on browser history.
 
   // Make sure onNavigate is only invoked if it has been passed down from container app
   if (onNavigate) {
@@ -18,8 +18,13 @@ const mount = (element, { onNavigate }) => {
 
   // mount now returns a function. facilitates container to subapp (child) communication
   return {
-    onParentNavigate(location) {
-      console.log(location); // location object derives from history.listen(onParentNavigate) function in MarketingApp.js
+    onParentNavigate({ pathname: nextPathname }) {
+      const { pathname } = history.location; // destructures pathname from memory history's location object
+
+      // prevents circular logic between browser history and memory history: if the two paths are not the same, then the navigation paths need to be synced.
+      if (pathname !== nextPathname) {
+        history.push(nextPathname); // syncs browser history detected in container with memory history in subapp
+      }
     },
   };
 };
@@ -29,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
   const devRoot = document.querySelector("#_marketing-dev-root");
 
   if (devRoot) {
-    mount(devRoot, {}); // Empty options object provided as second argument to prevent error when running Marketing subapp in isolation
+    mount(devRoot, { defaultHistory: createBrowserHistory() }); // Option provided of defaultHistory. Its value is an instance of Browser History. Its goal is to improve development experience when running this subapp in isolation by providing routing paths via browser history in the URL, not just in memory history.
   }
 }
 
