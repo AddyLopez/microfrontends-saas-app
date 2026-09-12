@@ -6,6 +6,9 @@ const packageJson = require("../package.json"); // Used to facilitate updating o
 // Development-specific Webpack configuration
 const devConfig = {
   mode: "development",
+  output: {
+    publicPath: "http://localhost:8080/",
+  },
   devServer: {
     port: 8080,
     historyApiFallback: {
