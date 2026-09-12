@@ -5,8 +5,8 @@ import {
   createGenerateClassName,
 } from "@material-ui/core/styles";
 
-// import Landing from "./components/Landing";
-// import Pricing from "./components/Pricing";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
 // productionPrefix is provided to prevent CSS class name collisions in production between microfrontends
 const generateClassName = createGenerateClassName({
@@ -19,7 +19,10 @@ const App = ({ history }) => {
     <div>
       <StylesProvider generateClassName={generateClassName}>
         <Router history={history}>
-          <Switch></Switch>
+          <Switch>
+            <Route path="/auth/signin" component={Signin} />
+            <Route path="/auth/signup" components={Signup} />
+          </Switch>
         </Router>
       </StylesProvider>
     </div>
