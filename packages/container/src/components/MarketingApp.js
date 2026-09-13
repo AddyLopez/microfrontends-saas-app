@@ -13,6 +13,7 @@ const MarketingApp = () => {
   // because onParentNavigate function is returned by mount, it is destructured from mount for use
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
+      initialPath: history.location.pathname, // the option initialPath is set to Browser History's current path
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location; // pathname from current browser history in container
 
