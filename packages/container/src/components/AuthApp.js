@@ -8,7 +8,7 @@ const AuthApp = () => {
   const history = useHistory(); // history object represents Browser History currently used in container app (not memory history in subapps)
 
   // useEffect hook makes sure mount function is run only once when component is first displayed. ref.current is reference to HTML element
-  // pass in onNavigate function to mount function to pass down to Auth subapp. Eventual purpose is to sync subapp's memory history with container app's browser history
+  // pass in onNavigate function to mount function to pass down to Auth subapp via a configuration object. Eventual purpose is to sync subapp's memory history with container app's browser history
   // pathname gets destructured from location object and renamed to nextPathname
   // because onParentNavigate function is returned by mount, it is destructured from mount for use
   useEffect(() => {
@@ -21,6 +21,9 @@ const AuthApp = () => {
         if (pathname !== nextPathname) {
           history.push(nextPathname); // syncs memory history in subapp with browser history in container
         }
+      },
+      onSignIn: () => {
+        console.log("User is signed in."); // onSignIn callback passed from AuthApp inside container to mount function in Auth subapp
       },
     });
 
