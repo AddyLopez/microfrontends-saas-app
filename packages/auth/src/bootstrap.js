@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { createMemoryHistory, createBrowserHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
 
-// Mount function to start up the app. Renders JSX in given element.
+// Mount function to start up the app. Renders JSX in given element
 const mount = (
   element,
   { onSignIn, onNavigate, defaultHistory, initialPath },
