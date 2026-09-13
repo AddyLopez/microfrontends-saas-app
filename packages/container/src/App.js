@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react"; // lazy is a function. Suspense is a component.
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import ProgressBar from "./components/ProgressBar";
 import {
   StylesProvider,
   createGenerateClassName,
@@ -24,7 +25,7 @@ const App = () => {
       <StylesProvider generateClassName={generateClassName}>
         <div>
           <Header />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<ProgressBar />}>
             <Switch>
               <Route path="/auth" component={AuthLazy} />
               <Route path="/" component={MarketingLazy} />
