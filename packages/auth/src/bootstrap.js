@@ -4,7 +4,10 @@ import App from "./App";
 import { createMemoryHistory, createBrowserHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
 
 // Mount function to start up the app. Renders JSX in given element.
-const mount = (element, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (
+  element,
+  { onSignIn, onNavigate, defaultHistory, initialPath },
+) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -18,7 +21,7 @@ const mount = (element, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, element);
+  ReactDOM.render(<App history={history} onSignIn={onSignIn} />, element);
 
   // mount now returns a function. facilitates container to subapp (child) communication
   return {
