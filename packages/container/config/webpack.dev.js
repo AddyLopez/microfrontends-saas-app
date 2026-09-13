@@ -4,6 +4,7 @@ const commonConfig = require("./webpack.common");
 const packageJson = require("../package.json"); // Used to facilitate updating of shared dependencies. Here, the JSON gets parsed as a regular JS object
 
 // Development-specific Webpack configuration
+// forward slash needed before index.html in historyApiFallback
 const devConfig = {
   mode: "development",
   output: {
