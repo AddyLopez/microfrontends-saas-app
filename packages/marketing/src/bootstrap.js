@@ -4,8 +4,12 @@ import App from "./App";
 import { createMemoryHistory, createBrowserHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
 
 // Mount function to start up the app. Renders JSX in given element.
-const mount = (element, { onNavigate, defaultHistory }) => {
-  const history = defaultHistory || createMemoryHistory(); // defaultHistory is used when running Marketing app in isolation in development. Otherwise, routing for subapps will rely on memory history, while routing for container app will rely on browser history.
+const mount = (element, { onNavigate, defaultHistory, initialPath }) => {
+  const history =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [initialPath], // gives memory history initial state to prevent a routing bug
+    }); // defaultHistory is used when running Marketing app in isolation in development. Otherwise, routing for subapps will rely on memory history, while routing for container app will rely on browser history.
 
   // Make sure onNavigate is only invoked if it has been passed down from container app
   if (onNavigate) {
