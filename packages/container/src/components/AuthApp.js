@@ -3,7 +3,7 @@ import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const AuthApp = () => {
+const AuthApp = ({ onSignIn }) => {
   const ref = useRef(null); // useRef React hook creates a reference to an HTML element. Starting value of null
   const history = useHistory(); // history object represents Browser History currently used in container app (not memory history in subapps)
 
@@ -23,7 +23,7 @@ const AuthApp = () => {
         }
       },
       onSignIn: () => {
-        console.log("User is signed in."); // onSignIn callback passed from AuthApp inside container to mount function in Auth subapp
+        onSignIn();
       },
     });
 
