@@ -22,9 +22,7 @@ const AuthApp = ({ onSignIn }) => {
           history.push(nextPathname); // syncs memory history in subapp with browser history in container
         }
       },
-      onSignIn: () => {
-        onSignIn();
-      },
+      onSignIn, // onSignIn callback passes onSignIn state from AuthApp inside container to mount function in Auth subapp
     });
 
     history.listen(onParentNavigate); // listens for any change to Browser History and invokes onParentNavigate
