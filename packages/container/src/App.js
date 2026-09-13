@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react"; // lazy is a function. Suspense is a component.
+import React, { lazy, Suspense, useState } from "react"; // lazy is a function. Suspense is a component.
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import ProgressBar from "./components/ProgressBar";
@@ -20,6 +20,8 @@ const generateClassName = createGenerateClassName({
 });
 
 const App = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   return (
     <BrowserRouter>
       <StylesProvider generateClassName={generateClassName}>
