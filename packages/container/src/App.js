@@ -1,5 +1,6 @@
-import React, { lazy, Suspense, useState } from "react"; // lazy is a function. Suspense is a component.
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { lazy, Suspense, useState, useEffect } from "react"; // lazy is a function. Suspense is a component.
+import { Router, Route, Switch, Redirect } from "react-router-dom"; // Redirect is a routing component, conditionally rendered below if isSignedIn is falsy
+import { createBrowserHistory } from "history";
 import Header from "./components/Header";
 import ProgressBar from "./components/ProgressBar";
 import {
@@ -20,11 +21,19 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "co",
 });
 
+const history = createBrowserHistory(); // Gives access to browser history instance in order to programmatically redirect user (e.g. when value of isSignedIn changes). Easier to use Router than using BrowserRouter.
+
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
+  useEffect(() => {
+    if (isSignedIn) {
+      history.push("/dashboard"); // if isSignedIn changes and isSignedIn is true, then redirect route to dashboard.
+    }
+  }, [isSignedIn]); // Runs whenever value of isSignedIn changes
+
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <StylesProvider generateClassName={generateClassName}>
         <div>
           <Header
@@ -36,13 +45,16 @@ const App = () => {
               <Route path="/auth">
                 <AuthLazy onSignIn={() => setIsSignedIn(true)} />
               </Route>
-              <Route path="/dashboard" component={DashboardLazy} />
+              <Route path="/dashboard">
+                {!isSignedIn && <Redirect to="/" />}
+                <DashboardLazy />
+              </Route>
               <Route path="/" component={MarketingLazy} />
             </Switch>
           </Suspense>
         </div>
       </StylesProvider>
-    </BrowserRouter>
+    </Router>
   );
 };
 
