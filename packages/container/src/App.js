@@ -13,6 +13,7 @@ import {
 // To enhance performance, only load or import code from subapp components when needed
 const MarketingLazy = lazy(() => import("./components/MarketingApp"));
 const AuthLazy = lazy(() => import("./components/AuthApp"));
+const DashboardLazy = lazy(() => import("./components/DashboardApp"));
 
 // productionPrefix is provided to future-proof application from CSS class name collisions in production.
 const generateClassName = createGenerateClassName({
@@ -35,6 +36,7 @@ const App = () => {
               <Route path="/auth">
                 <AuthLazy onSignIn={() => setIsSignedIn(true)} />
               </Route>
+              <Route path="/dashboard" component={DashboardLazy} />
               <Route path="/" component={MarketingLazy} />
             </Switch>
           </Suspense>
