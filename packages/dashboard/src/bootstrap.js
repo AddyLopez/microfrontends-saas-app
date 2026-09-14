@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import Dashboard from "./components/Dashboard.vue";
 
-// Mount function to start up the app.
+// Mount function to start up the app
 const mount = (element) => {
   const app = createApp(Dashboard);
   app.mount(element); // This mount function on app is specific to Vue and unrelated to the other mount function. It tells Vue to show a component inside the DOM.
