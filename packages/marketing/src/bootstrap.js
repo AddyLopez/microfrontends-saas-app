@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import { createMemoryHistory, createBrowserHistory } from "history"; // Not imported from react-router-dom because React Router uses this library.
 
@@ -14,11 +14,14 @@ const mount = (element, { onNavigate, defaultHistory, initialPath }) => {
   // Make sure onNavigate is only invoked if it has been passed down from container app
   if (onNavigate) {
     // "listen" event listener exists on history object and will call any function provided as argument.
-    // onNavigate is invoked whenever memory history's URL (path) changes and communicates up to the container app.
-    history.listen(onNavigate);
+    // onNavigate is invoked whenever update to memory history's URL (path) changes and communicates up to the container app.
+    history.listen((update) => {
+      onNavigate({ pathname: update.location.pathname });
+    });
   }
 
-  ReactDOM.render(<App history={history} />, element);
+  const root = createRoot(element);
+  root.render(<App history={history} />);
 
   // mount now returns a function. facilitates container to subapp (child) communication
   return {
