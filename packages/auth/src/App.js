@@ -1,34 +1,39 @@
-import React from "react";
-import { Switch, Route, Router } from "react-router-dom";
-import {
-  StylesProvider,
-  createGenerateClassName,
-} from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Router } from "react-router-dom";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 
-// productionPrefix is provided to prevent CSS class name collisions in production between microfrontends
-const generateClassName = createGenerateClassName({
-  productionPrefix: "au",
-});
-
-// Using Router rather than BrowserRouter enables use of Memory History for subapps while Browser History is used for the container app
 const App = ({ history, onSignIn }) => {
+  const [location, setLocation] = useState(history.location); // With React Router v6, a history object is no longer exposed directly. Instead, navigation state is built into the Router component itself. Explicit state management enables communication between the microfrontends while keeping Module Federation architecture intact.
+
+  useEffect(() => {
+    // Listen to history changes and update location state
+    const unlisten = history.listen((update) => {
+      setLocation(update.location);
+    });
+
+    return unlisten; // clean up the listener on unmount
+  }, [history]);
+
+  // injectFirst attribute causes MUI to be added to beginning of html head tag so as not to override global CSS styles
   return (
     <div>
-      <StylesProvider generateClassName={generateClassName}>
-        <Router history={history}>
-          <Switch>
-            <Route path="/auth/signin">
-              <Signin onSignIn={onSignIn} />
-            </Route>
-            <Route path="/auth/signup">
-              <Signup onSignIn={onSignIn} />
-            </Route>
-          </Switch>
+      <StyledEngineProvider injectFirst>
+        <Router location={location} navigator={history}>
+          <Routes>
+            <Route
+              path="/auth/signin"
+              element={<Signin onSignIn={onSignIn} />}
+            />
+            <Route
+              path="/auth/signup"
+              element={<Signup onSignIn={onSignIn} />}
+            />
+          </Routes>
         </Router>
-      </StylesProvider>
+      </StyledEngineProvider>
     </div>
   );
 };
