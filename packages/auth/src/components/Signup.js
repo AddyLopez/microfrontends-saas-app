@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link to="/" style={{ textDecoration: "none" }}>
-        Your Website
+        Addy López
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -56,7 +56,7 @@ export default function SignUp({ onSignIn }) {
           <LockOutlinedIcon />
         </StyledAvatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign Up
         </Typography>
         <StyledForm onSubmit={(e) => e.preventDefault()} noValidate>
           <Grid container spacing={2}>
@@ -109,7 +109,7 @@ export default function SignUp({ onSignIn }) {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="I want to receive marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -130,6 +130,21 @@ export default function SignUp({ onSignIn }) {
         </StyledForm>
       </StyledPaper>
       <Box mt={5}>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
+          <a
+            href="https://github.com/AddyLopez/microfrontends-saas-app"
+            target="_blank"
+            title="To project's repository on GitHub"
+          >
+            Open-source code
+          </a>{" "}
+          by Addy López
+        </Typography>
         <Copyright />
       </Box>
     </Container>
