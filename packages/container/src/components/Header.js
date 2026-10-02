@@ -32,7 +32,7 @@ export default function Header({ isSignedIn, onSignOut }) {
             to="/"
             sx={{ textDecoration: "none" }}
           >
-            App
+            TechTonix Solutions
           </Typography>
           <Button
             color="primary"
