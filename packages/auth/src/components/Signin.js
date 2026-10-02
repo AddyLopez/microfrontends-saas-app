@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-        Your Website
+        Addy López
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -56,7 +56,7 @@ export default function SignIn({ onSignIn }) {
           <LockOutlinedIcon />
         </StyledAvatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
         <StyledForm onSubmit={(e) => e.preventDefault()} noValidate>
           <TextField
@@ -96,12 +96,27 @@ export default function SignIn({ onSignIn }) {
           </SubmitButton>
           <Grid container>
             <Grid item>
-              <Link to="/auth/signup">{"Don't have an account? Sign Up"}</Link>
+              <Link to="/auth/signup">{"Don't have an account? Sign up"}</Link>
             </Grid>
           </Grid>
         </StyledForm>
       </StyledPaper>
       <Box mt={8}>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
+          <a
+            href="https://github.com/AddyLopez/microfrontends-saas-app"
+            target="_blank"
+            title="To project's repository on GitHub"
+          >
+            Open-source code
+          </a>{" "}
+          by Addy López
+        </Typography>
         <Copyright />
       </Box>
     </Container>
