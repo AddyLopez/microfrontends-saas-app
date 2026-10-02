@@ -17,7 +17,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Addy López
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -73,25 +73,20 @@ const footers = [
   {
     title: "Features",
     description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
+      "Blog",
+      "Project Launch",
+      "Collaborations",
+      "Developer API",
+      "Get the App",
     ],
   },
   {
     title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
+    description: ["FAQs", "Careers", "TechTonix Tips", "Community Forum"],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
+    description: ["Privacy Policy", "Terms of Use"],
   },
 ];
 
@@ -115,9 +110,9 @@ export default function Pricing() {
           color="textSecondary"
           component="p"
         >
-          Quickly build an effective pricing table for your potential customers
-          with this layout. It&apos;s built with default Material-UI components
-          with little customization.
+          Whether you're looking for a free, Pro, or Enterprise-level
+          experience, TechTonix Solutions offers flexible pricing and
+          high-quality services.
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -220,6 +215,24 @@ export default function Pricing() {
           ))}
         </Grid>
         <Box mt={5}>
+          <Typography variant="h6" align="center" gutterBottom>
+            About This Website
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            <a
+              href="https://github.com/AddyLopez/microfrontends-saas-app"
+              target="_blank"
+              title="To project's repository on GitHub"
+            >
+              Open-source code
+            </a>{" "}
+            featuring microfrontends architecture by Addy López
+          </Typography>
           <Copyright />
         </Box>
       </Container>
