@@ -21,7 +21,7 @@ function Copyright() {
         color="inherit"
         sx={{ textDecoration: "none" }}
       >
-        Your Website
+        Addy López
       </MaterialLink>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -59,23 +59,23 @@ export default function Album() {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              At TechTonix Solutions, we specialize in Software as a Service and
+              offer Free, Pro, and Enterprise tiers to meet your software needs.
+              Learn about our different services and pricing options.
             </Typography>
             <Box sx={{ mt: 4 }}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
                   <Link to="/pricing" style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary">
-                      Pricing
+                      Pro Pricing
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/pricing" style={{ textDecoration: "none" }}>
                     <Button variant="outlined" color="primary">
-                      Pricing
+                      Free
                     </Button>
                   </Link>
                 </Grid>
@@ -104,19 +104,21 @@ export default function Album() {
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      Software Solutions
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+                      Straightforward, user-centric interface with customization
+                      options for all customers. High-powered technical
+                      troubleshooting upon request for Pro and Enterprise
+                      subscribers.
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      View
+                      View Details
                     </Button>
                     <Button size="small" color="primary">
-                      Edit
+                      Watch Tutorial
                     </Button>
                   </CardActions>
                 </Card>
@@ -134,7 +136,7 @@ export default function Album() {
         }}
       >
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          About This Website
         </Typography>
         <Typography
           variant="subtitle1"
@@ -142,7 +144,14 @@ export default function Album() {
           color="textSecondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          <a
+            href="https://github.com/AddyLopez/microfrontends-saas-app"
+            target="_blank"
+            title="To project's repository on GitHub"
+          >
+            Open-source code
+          </a>{" "}
+          featuring microfrontends architecture by Addy López
         </Typography>
         <Copyright />
       </Box>
